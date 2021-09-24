@@ -16,10 +16,36 @@
 				ou avec un goûter réconfortant. Mais attention, vous verrez qu'il est
 				difficile de s'arrêter.
 			</p>
+
+            <section class="menu">
+				<h2>Menu</h2>
+				<div class="menu-item" v-for="item in simpleMenu">
+					<img
+						class="menu-item__image"
+						:src="item.image.source"
+						:alt="item.image.alt"
+					/>
+					<div>
+						<h3>{{ item.name }}</h3>
+						<p v-if="item.inStock">En stock</p>
+						<p v-else>En rupture de stock</p>
+						<div>
+							<label for="add-item-quantity">Quantité : {{ item.quantity }} </label>
+							<input v-model="item.quantity" id="" type="number" />
+							<button @click="addToShoppingCart(item.quantity)">Ajouter au panier d'achat</button>
+						</div>
+					</div>
+				</div>
+			</section>
+
+            <aside class="shopping-cart">
+				<h2>Panier d'achat: {{ cartTotalItems }} articles</h2>
+			</aside>
+
 			<h2>Contactez nous</h2>
 			<p>Adresse : {{ address }}</p>
-			<p>Téléphone : {{ phoneNumber }}</p>
-			<p>Email : {{ emailAddress }}</p>
+			<p>Téléphone : {{ phone }}</p>
+			<p>Email : {{ email }}</p>
 			<p>Horaires :</p>
 			<ul>
 				<li>L-V: 06:00 à 16:00</li>
@@ -36,16 +62,53 @@
             const app = new Vue({
                 el: '#app',
                 data: {
-                    restaurantName: 'Cafe Vue',
-                    address: '18 avenue du Beurre, Paris, France',
-                    phoneNumber: '01 88 88 88 88',
-                    emailAddress: 'hello@cafewithavue.bakery'
-                },
-                computed: {  
-                    copyRight() {
-                        return 'Copyright ' + this.restaurantName + ' 2019'
+					address: "18 avenue du Beurre, Paris, France",
+					email: "hello@cafewithavue.bakery",
+					phone: "01 88 88 88 88",
+					restaurantName: "La belle vue",
+                    cartTotalItems: 0,
+					simpleMenu: [
+						{
+							name: "Croissant",
+							image: {
+								source: "./images/croissant.jpg",
+								alt: "Un croissant"
+							},
+							inStock: true,
+							quantity: 1
+						},
+						{
+							name: "Baguette de pain",
+							image: {
+								source: "./images/french-baguette.jpeg",
+								alt: "Quatre baguettes de pain"
+							},
+							inStock: true,
+							quantity: 1
+						},
+						{
+							name: "Éclair",
+							image: {
+								source: "./images/eclair.jpg",
+								alt: "Éclair au chocolat"
+							},
+							inStock: false,
+							quantity: 1
+						}
+					]
+				},
+				computed: {
+					copyRight() {
+						const currentYear = new Date().getFullYear()
+
+						return `Copyright ${this.restaurantName} ${currentYear}`
+					}
+				},
+                methods: {
+                    addToShoppingCart(qty) {
+                        this.cartTotalItems += parseInt(qty)
                     }
-                }  
+                }
             })
         </script>
 	</body>
