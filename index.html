@@ -1,22 +1,33 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <title>Mon Application Vue.js</title>
-</head>
-<body>
-    <div id="app">
-        <h1>Ma premiere application Vue.js !</h1>
-
-        <p>J'ai hâte de créer des applications incroyables !</p>
-    </div>
-    <script>
-    // Vue n'est pas encore chargé donc une ReferenceError devrait être retournée
-    console.log(Vue)
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <script>
-        // La console devrait maintenant afficher une fonction
-        console.log(Vue)
-    </script>
-</body>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<link rel="stylesheet" href="./styles.css" />
+		<title>Cafe with a Vue</title>
+	</head>
+	<body>
+		<div class="app">
+			<h1>{{ restaurantName }}</h1>
+			<p class="description">
+				Bienvenue dans notre café la belle vue ! Nous sommes réputés pour notre
+				pain et nos merveilleuses pâtisseries. Faites vous plaisir dès le matin
+				ou avec un goûter réconfortant. Mais attention, vous verrez qu'il est
+				difficile de s'arrêter.
+			</p>
+			<footer class="footer">
+				<p>Copyright La belle vue 2020</p>
+			</footer>
+		</div>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script>
+            const app = new Vue({
+                el: '.app',
+                data: {
+                    restaurantName: 'Cafe Vue'
+                }  
+            })
+        </script>
+	</body>
 </html>
